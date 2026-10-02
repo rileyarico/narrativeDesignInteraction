@@ -9,7 +9,7 @@ public class bunnyUI : MonoBehaviour
     {
         //GameController.instance.setBunnyUI(this);
         GameController gC = FindAnyObjectByType<GameController>();  
-        gC.setBunnyUI(this);
+        //gC.setBunnyUI(this);
     }
 
     public void addBuns(int bun)

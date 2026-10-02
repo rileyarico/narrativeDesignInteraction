@@ -1,25 +1,25 @@
 using UnityEngine;
 
-public class coinGrab : MonoBehaviour
+public class cornGrab : MonoBehaviour
 {
-    public string coinID;
+    public string cornID;
 
     public void Awake()
     {
-        coinID = this.name + "-" + transform.position.ToString();
+        cornID = this.name + "-" + transform.position.ToString();
     }
     public void OnTriggerEnter(Collider other)
     {
         Debug.Log("Collided Object: " + other.gameObject.name);
         if(other.gameObject.tag == "Player")
         {
-            coinGot();
+            cornGot();
         }
     }
 
-    public void coinGot()
+    public void cornGot()
     {
-        GameController.instance.coinCollect(coinID);
+        GameController.instance.cornCollect(cornID);
         this.GetComponent<MeshRenderer>().enabled = false;
         this.GetComponent<CapsuleCollider>().enabled = false;
         this.GetComponent<SphereCollider>().enabled = false;

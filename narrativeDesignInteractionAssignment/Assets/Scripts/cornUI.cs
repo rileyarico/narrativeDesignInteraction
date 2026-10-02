@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class coinUI : MonoBehaviour
+public class cornUI : MonoBehaviour
 {
     public TextMeshProUGUI coinAmtText;
 
@@ -10,8 +10,8 @@ public class coinUI : MonoBehaviour
         GameController.instance.setUI(this);
     }
 
-    public void addCoins(int coin)
+    public void addCorn(int corn)
     {
-        coinAmtText.text = coin.ToString();
+        coinAmtText.text = corn.ToString();
     }
 }

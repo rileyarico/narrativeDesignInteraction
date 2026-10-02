@@ -9,14 +9,14 @@ public class GameController : MonoBehaviour
     //this instance variable is the static reference to this class
     //it can only be overwritten within this class (the private set determines that)
     public static GameController instance { get; private set; }
-    public coinAdd coinUpdate;
-    public coinUI coinHUD;
-    public int currentCoins = 0;
+    public cornAdd cornUpdate;
+    public cornUI cornHUD;
+    public int currentCorn = 0;
 
-    public bunnyAdd bunnyUpdate;
+    /*public bunnyAdd bunnyUpdate;
     public bunnyUI bunnyHUD;
     public int currentBuns = 0;
-    public List<string> collectedBunIDs;
+    public List<string> collectedBunIDs;*/
 
 
     public Transform startingLoc;
@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
     public bool firstSceneloaded = false;
     public GameObject ThirdPersonRig;
 
-    public List<string> collectedCoinIDs;
+    public List<string> collectedCornIDs;
 
     public void Awake()
     {
@@ -65,8 +65,8 @@ public class GameController : MonoBehaviour
             }
         }
 
-        loadCoins();
-        loadBuns();
+        loadCorn();
+        //loadBuns();
     }
 
     public void SpawnCharacter(Vector3 loc, Quaternion rot)
@@ -83,38 +83,38 @@ public class GameController : MonoBehaviour
         loadRot = rot;
     }
 
-    public void coinCollect(string coinID)
+    public void cornCollect(string cornID)
     {
         //Debug.Log("Coin ID " + coinID);
-        collectedCoinIDs.Add(coinID);  
-        currentCoins++;
-        coinUpdate.AddListener(coinHUD.addCoins);
-        coinUpdate.Invoke(currentCoins);
+        collectedCornIDs.Add(cornID);  
+        currentCorn++;
+        cornUpdate.AddListener(cornHUD.addCorn);
+        cornUpdate.Invoke(currentCorn);
     }
 
-    public void loadCoins()
+    public void loadCorn()
     {
-        coinGrab[] allCoinsInScene = FindObjectsByType<coinGrab>();
+        cornGrab[] allCornInScene = FindObjectsByType<cornGrab>();
 
-        if(collectedCoinIDs != null)
+        if(collectedCornIDs != null)
         {
-            foreach (coinGrab coin in allCoinsInScene)
+            foreach (cornGrab corn in allCornInScene)
             {
-                if(collectedCoinIDs.Contains(coin.coinID))
+                if(collectedCornIDs.Contains(corn.cornID))
                 {
-                    Destroy(coin.gameObject);
+                    Destroy(corn.gameObject);
                 }
             }
         }
     }
 
     //this is a 'setter' method for the coin HUD variable in this class
-    public void setUI(coinUI ui)
+    public void setUI(cornUI ui)
     {
-        coinHUD = ui;
+        cornHUD = ui;
     }
 
-    public void bunnyCollect(string bunID)
+    /*public void bunnyCollect(string bunID)
     {
         collectedBunIDs.Add(bunID);
         currentBuns++;
@@ -155,19 +155,19 @@ public class GameController : MonoBehaviour
         {
             tpc.enabled = true;
         }
-    }
+    }*/
 
 }
 
 [System.Serializable]
-public class coinAdd : UnityEvent<int>
+public class cornAdd : UnityEvent<int>
 {
 
 }
 
-[System.Serializable]
+/*[System.Serializable]
 public class bunnyAdd : UnityEvent<int>
 { 
 
-}
+}*/
 

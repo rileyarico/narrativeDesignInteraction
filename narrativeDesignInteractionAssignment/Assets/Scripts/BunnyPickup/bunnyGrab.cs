@@ -13,11 +13,11 @@ public class bunnyGrab : MonoBehaviour
         Debug.Log("Collided Object: " + other.gameObject.name);
         if (other.gameObject.tag == "Player")
         {
-            bunnyGot();
+            //bunnyGot();
         }
     }
 
-    public void bunnyGot()
+    /*public void bunnyGot()
     {
         GameController.instance.bunnyCollect(bunnyID);
         this.GetComponent<SphereCollider>().enabled = false;
@@ -31,5 +31,5 @@ public class bunnyGrab : MonoBehaviour
             
         }*/
 
-    }
+    //}
 }
