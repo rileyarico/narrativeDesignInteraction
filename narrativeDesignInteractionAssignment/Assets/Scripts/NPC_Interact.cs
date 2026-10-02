@@ -19,10 +19,19 @@ public class NPC_Interact : MonoBehaviour
     public string interaction;
     public bool canInteract;
     public DialogueRunner dialogue;
+    public NPC_Cam_Controller camController;
+    public NPC_Data npcData;
+
+    public void Start()
+    {
+        //this behavior is a bit 'static' compared to previous system design techniques
+        //but we are making this more 'hard-coded' in an attempt to standardize our NPC_Cam_Rig system
+        camController = transform.GetComponentInChildren<NPC_Cam_Controller>();
+    }
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             setText(interaction);
             canInteract = true;
@@ -31,7 +40,7 @@ public class NPC_Interact : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             setText("");
             canInteract = false;
@@ -46,15 +55,23 @@ public class NPC_Interact : MonoBehaviour
 
     public void Update()
     {
-        if(canInteract)
+        if (canInteract)
         {
-            if(Keyboard.current.eKey.wasPressedThisFrame) //new syntax, no longer getKeyDown
+            if (Keyboard.current.eKey.wasPressedThisFrame) //new syntax, no longer getKeyDown
             {
                 Debug.Log("You talked to the NPC");
                 setText("");
-                dialogue.StartDialogue("Start"); //be mindful of the case of yarnSpinner node
+                camController.movePlayer();
+                dialogue.StartDialogue(npcData.startingNode); //be mindful of the case of yarnSpinner node
                 canInteract = false;
             }
         }
+    }
+
+    [YarnCommand("dialoguePhaseSet")]
+    public void setYarnPhase()
+    {
+        InMemoryVariableStorage vData = GameObject.FindAnyObjectByType<InMemoryVariableStorage>();
+        vData.SetValue("$dialoguePhase", npcData.currentPhase.ToString());
     }
 }

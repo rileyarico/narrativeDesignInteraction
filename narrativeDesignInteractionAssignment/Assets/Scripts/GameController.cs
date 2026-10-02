@@ -113,6 +113,25 @@ public class GameController : MonoBehaviour
     {
         cornHUD = ui;
     }
+    public void setPlayerMovement(bool b)
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        ThirdPersonController tpc = player.GetComponent<ThirdPersonController>();
+
+        if (b)
+        {
+            tpc.enabled = false;
+        }
+        else
+        {
+            tpc.enabled = true;
+        }
+    }
+    public void moveForDialogue(Transform movePos)
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.transform.position = movePos.position;
+    }
 
     /*public void bunnyCollect(string bunID)
     {
